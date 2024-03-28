@@ -2,7 +2,8 @@
 
 // Define the root directory (ensure proper path)
 // $rootDirectory = __DIR__ . '/path/to/your/folder'; // Replace with actual path
-$rootDirectory = 'E:\laragon\www\mission\task-01\home';
+// $rootDirectory = 'E:\laragon\www\mission\task-01\home';
+$rootDirectory = 'C:\xampp\htdocs\github\mission\task-01\home';
 
 // Function to get directory contents (recursive for nested folders)
 function getDirContents($dir)
