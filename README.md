@@ -1,1 +1,1 @@
-# Git-project
+# Assignment of tasks
