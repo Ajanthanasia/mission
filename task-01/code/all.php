@@ -18,7 +18,8 @@ function getDirContents($dir)
             if (is_dir($filePath)) {
                 $contents[$item] = getDirContents($filePath); // Recursively get subfolder contents
             } else {
-                $contents[] = $item;
+                // $contents[] = $item;
+                $contents[] = array('name' => $item, 'lastModified' => filemtime($filePath));
             }
         }
     }
@@ -61,11 +62,16 @@ function displayDirStructure($contents, $currentDir, $rootDirectory, $indent = '
             // echo $fullPath;
             $url = getStringDifferent($currentDir, $rootDirectory);
             // echo $url;
-            echo '<li>' . $indent . '<a href="?dir=' . urlencode($url . '/' . $name) . '">' . $name . '/</a></li>';
+            if (is_numeric($name)) {
+                echo '<li>' . $subContents['name'] . '          modify:' . date('Y-m-d H:i:s', $subContents['lastModified']) . '</li>';
+            } else {
+                echo '<li>' . $indent . '<a href="?dir=' . urlencode($url . '/' . $name) . '">' . $name . '/</a></li>';
+            }
             // echo '<li>' . $indent . '<a href="?dir=' . urlencode($currentDir . '/' . $name) . '">' . $name . '/</a></li>';
         } else { // File
             //   echo '<li>' . $indent . $name . 'file</li>';
             // echo '<li>' . $subContents . '' . $indent . ' ' . $name . '</li>';
+            // echo $subContents;
             echo '<li>' . $subContents . '</li>';
         }
     }
