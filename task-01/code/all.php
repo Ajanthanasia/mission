@@ -45,7 +45,7 @@ function displayDirStructure($contents, $indent = '')
     foreach ($contents as $name => $subContents) {
         if (is_array($subContents)) { // Folder
             echo '<li>' . $indent . '<a href="?dir=' . urlencode($name) . '">' . $name . '/</a></li>';
-            displayDirStructure($subContents, $indent . '  '); // Increase indentation for subfolders
+            // displayDirStructure($subContents, $indent . '  '); // Increase indentation for subfolders
         } else { // File
             //   echo '<li>' . $indent . $name . 'file</li>';
             // echo '<li>' . $subContents . '' . $indent . ' ' . $name . '</li>';
