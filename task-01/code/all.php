@@ -38,16 +38,29 @@ if (isset($_GET['dir'])) {
 // Get directory contents
 $dirContents = getDirContents($currentDir);
 
+function getStringDifferent($currentDir, $rootDirectory)
+{
+    $len = strlen($rootDirectory);
+    $difference = substr($currentDir, $len + 1);
+    return $difference;
+}
+
 // Function to display directory structure with links (optional)
-function displayDirStructure($contents, $indent = '')
+function displayDirStructure($contents, $currentDir, $rootDirectory, $indent = '')
 {
     echo '<ul>';
     foreach ($contents as $name => $subContents) {
         if (is_array($subContents)) { // Folder
-            echo '<li>' . $indent . '<a href="?dir=' . urlencode($name) . '">' . $name . '/</a></li>';
-            displayDirStructure($subContents, $indent . '  '); // Increase indentation for subfolders
+            // echo '<li>' . $indent . '<a href="?dir=' . urlencode($name) . '">' . $name . '/</a></li>';
+            // echo urlencode($name) . '<br>';
+            // echo $currentDir;
+            // displayDirStructure($subContents, $indent . '  '); // Increase indentation for subfolders
+            // displayDirStructure($subContents, $currentDir, $rootDirectory, $indent . '  '); // Increase indentation for subfolders
             // $fullPath = realpath($currentDir . '/' . $name);
-            // echo '<li>' . $indent . '<a href="?dir=' . urlencode($fullPath) . '">' . $name . '/</a></li>';
+            // echo $fullPath;
+            $url = getStringDifferent($currentDir, $rootDirectory);
+            // echo $url;
+            echo '<li>' . $indent . '<a href="?dir=' . urlencode($url . '/' . $name) . '">' . $name . '/</a></li>';
             // echo '<li>' . $indent . '<a href="?dir=' . urlencode($currentDir . '/' . $name) . '">' . $name . '/</a></li>';
         } else { // File
             //   echo '<li>' . $indent . $name . 'file</li>';
@@ -63,5 +76,5 @@ echo '<h1>Directory Listing</h1>';
 if ($currentDir !== $rootDirectory) {
     echo '<a href="?">Back to Root</a><br>'; // Add a "Back to Root" link
 }
-displayDirStructure($dirContents);
-// displayDirStructure($dirContents, $currentDir);
+// displayDirStructure($dirContents);
+displayDirStructure($dirContents, $currentDir, $rootDirectory);
