@@ -19,11 +19,25 @@ function getDirContents($dir)
                 $contents[$item] = getDirContents($filePath); // Recursively get subfolder contents
             } else {
                 // $contents[] = $item;
-                $contents[] = array('name' => $item, 'lastModified' => filemtime($filePath));
+                $fileSize = filesize($filePath);
+
+                // Format file size with appropriate units
+                $formattedSize = formatFileSize($fileSize);
+
+                $contents[] = array('name' => $item, 'lastModified' => filemtime($filePath), 'size' => $formattedSize);
             }
         }
     }
     return $contents;
+}
+function formatFileSize($bytes)
+{
+    $units = array('B', 'KB', 'MB', 'GB', 'TB');
+    $bytes = max($bytes, 0);
+    $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+    $pow = min($pow, count($units) - 1);
+    $bytes /= pow(1024, $pow);
+    return round($bytes, 2) . ' ' . $units[$pow];
 }
 
 // Handle user input (if clicking on folders)
@@ -63,7 +77,7 @@ function displayDirStructure($contents, $currentDir, $rootDirectory, $indent = '
             $url = getStringDifferent($currentDir, $rootDirectory);
             // echo $url;
             if (is_numeric($name)) {
-                echo '<li>' . $subContents['name'] . '          modify:' . date('Y-m-d H:i:s', $subContents['lastModified']) . '</li>';
+                echo '<li>' . $subContents['name'] . 'size : ' . $subContents['size'] . ' modify:' . date('Y-m-d H:i:s', $subContents['lastModified']) . '</li>';
             } else {
                 echo '<li>' . $indent . '<a href="?dir=' . urlencode($url . '/' . $name) . '">' . $name . '/</a></li>';
             }
@@ -78,10 +92,30 @@ function displayDirStructure($contents, $currentDir, $rootDirectory, $indent = '
     echo '</ul>';
 }
 
+function getUrlInsideFold($arr, $no)
+{
+    $Limit = $no + 1;
+    $url = "";
+    for ($i = 0; $i < $Limit; $i++) {
+        $url = $url . $arr[$i] . '/';
+    }
+    return $url;
+}
+function getDir($root, $current)
+{
+    $firstLen = strlen($root);
+    $subFolder = substr($current, $firstLen + 1);
+    $arr = explode("\\", $subFolder);
+    for ($i = 0; $i < count($arr); $i++) {
+        $urlGet = getUrlInsideFold($arr, $i);
+        echo "&nbsp<a href='?dir=" . urlencode($urlGet) . "'>" . $arr[$i] . "</a>";
+    }
+}
 // Display directory listing
 echo '<h1>Directory Listing</h1>';
 if ($currentDir !== $rootDirectory) {
     echo '<a href="?">Back to Root</a><br>'; // Add a "Back to Root" link
+    getDir($rootDirectory, $currentDir);
 }
 // displayDirStructure($dirContents);
 displayDirStructure($dirContents, $currentDir, $rootDirectory);
