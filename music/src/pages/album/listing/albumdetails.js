@@ -13,6 +13,7 @@ export default function Albumdetails() {
     { key: 7, artist: "Aniruth" },
     { key: 8, artist: "A.R.Rahuman" },
     { key: 9, artist: "Jonitha" },
+    { key: 10, artist: "bommi" },
   ];
   function Album(props) {
     return (
