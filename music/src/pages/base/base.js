@@ -7,6 +7,7 @@ import Artistlisting from "../artist/listing/artistlisting";
 import Albumdetails from "../album/details/albumdetails";
 import Albumlisting from "../album/listing/albumdetails";
 import Sidebar from "../../sitebar";
+import SingleAlbum from "../album/listing/single-album";
 import "../home/home.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -25,6 +26,8 @@ export default function Base() {
             <Route path="/artistlisting" element={<Artistlisting />} />
             <Route path="/albumlisting" element={<Albumlisting />} />
             <Route path="/albumdetails" element={<Albumdetails />} />
+            {/* <Route path="/single-album" element={<SingleAlbum />} /> */}
+            <Route path="/albumlisting/single-album/:id" element={<SingleAlbum />} />
           </Routes>
         </div>
       </Router>
