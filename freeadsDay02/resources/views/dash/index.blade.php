@@ -1,13 +1,16 @@
 @extends('layout')
 @section('content')
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel">
-            <h3>Hi, {{ Auth::user()->name }}</h3>
-            <label for="">You are successfully login.</label>
+<div class="container">
+    <div class="wrapper">
+        <div class="card">
+            <!-- <img src="img.jpg" alt="John" style="width:100%"> -->
+            <h1>{{ Auth::user()->name }}</h1>
+            <!-- <p class="title">CEO & Founder, Example</p> -->
+            <p>You are successfully login.</p>
         </div>
     </div>
 </div>
+
 <div class="row">
     <a href="{{route('user.edit')}}">
         <button>Edit Profile</button>
