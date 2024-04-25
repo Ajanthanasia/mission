@@ -19,4 +19,13 @@
             <button type="submit">Update</button>
         </div>
     </form>
+
+    <hr>
+    <form action="{{ route('ad.photo.upload') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <label for="">Photo Upload</label>
+        <input type="file" name="photo" id="photo">
+        <input type="hidden" name="ad_id" value="{{ $ad->id }}">
+        <button type="submit">UPload</button>
+    </form>
 @endsection

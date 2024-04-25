@@ -6,6 +6,7 @@ use App\Models\Announcement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Throwable;
 
 class AdAllController extends Controller
@@ -52,6 +53,20 @@ class AdAllController extends Controller
             return redirect()->back()->with('success', 'Ad Deleted');
         } catch (Throwable $th) {
             DB::rollBack();
+            return redirect()->back();
+        }
+    }
+
+    public function upload(Request $request)
+    {
+        try {
+            $id = $request->ad_id;
+            $file = $request->file('photo');
+            Storage::disk('local')->put('img.jpg', $file);
+            dd($id, $file);
+        } catch (Throwable $th) {
+            DB::rollBack();
+            dd($th);
             return redirect()->back();
         }
     }

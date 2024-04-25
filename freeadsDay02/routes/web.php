@@ -37,3 +37,5 @@ Route::get('ad/all/index', [AdAllController::class, 'index'])->name('ad.all.inde
 Route::get('ad/all/edit', [AdAllController::class, 'edit'])->name('ad.all.edit');
 Route::post('ad/all/update', [AdAllController::class, 'update'])->name('ad.all.update');
 Route::get('ad/all/destroy', [AdAllController::class, 'destroy'])->name('ad.all.destroy');
+
+Route::post('ad/photo/upload', [AdAllController::class, 'upload'])->name('ad.photo.upload');
