@@ -23,6 +23,7 @@ Route::get('user/edit', [SignInController::class, 'editProfile'])->name('user.ed
 Route::post('user/update', [SignInController::class, 'updateProfile'])->name('user.update');
 Route::get('user/dash', [SignInController::class, 'dash'])->name('user.dash');
 Route::get('logout', [SignInController::class, 'logout'])->name('logout');
+Route::get('user/destroy', [SignInController::class, 'destroy'])->name('user.destroy');
 
 Route::get('sign-up', [SignUpController::class, 'create'])->name('sign-up');
 Route::post('sign-up-store', [SignUpController::class, 'store'])->name('sign-up.store');

@@ -23,7 +23,7 @@ class SignInController extends Controller
                 'password' => $request->password,
             ];
             if (Auth::attempt($data)) {
-                return view('dash.index');
+                return view('dash.index')->with('success', 'Login Success');
             } else {
                 return redirect()->back();
             }
@@ -61,5 +61,19 @@ class SignInController extends Controller
     {
         Auth::logout();
         return redirect('/');
+    }
+
+    public function destroy(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $id = $request->id;
+            User::where('id', $id)->delete();
+            DB::commit();
+            return redirect('/');
+        } catch (Throwable $th) {
+            DB::rollBack();
+            return redirect()->back();
+        }
     }
 }

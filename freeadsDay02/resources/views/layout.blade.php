@@ -11,6 +11,13 @@
 <body>
     <div class="container">
         <div class="wrapper">
+            @if (Session::has('success'))
+                <div>
+                    <strong>{{ Session::get('success') }}</strong>
+                </div>
+            @endif
+        </div>
+        <div class="wrapper">
             @yield('content')
         </div>
     </div>

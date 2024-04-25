@@ -27,7 +27,7 @@ class SignUpController extends Controller
             $user->remember_token = Uuid::uuid4()->toString();
             $user->save();
             DB::commit();
-            return redirect('/');
+            return redirect('/')->with('success', 'Account Created');
         } catch (Throwable $th) {
             DB::rollBack();
             return redirect()->back();
