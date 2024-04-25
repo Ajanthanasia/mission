@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdAddController;
+use App\Http\Controllers\AdAllController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SignUpController;
@@ -27,3 +29,11 @@ Route::get('user/destroy', [SignInController::class, 'destroy'])->name('user.des
 
 Route::get('sign-up', [SignUpController::class, 'create'])->name('sign-up');
 Route::post('sign-up-store', [SignUpController::class, 'store'])->name('sign-up.store');
+
+Route::get('ad/add/create', [AdAddController::class, 'create'])->name('ad.add.create');
+Route::post('ad/add/store', [AdAddController::class, 'store'])->name('ad.add.store');
+
+Route::get('ad/all/index', [AdAllController::class, 'index'])->name('ad.all.index');
+Route::get('ad/all/edit', [AdAllController::class, 'edit'])->name('ad.all.edit');
+Route::post('ad/all/update', [AdAllController::class, 'update'])->name('ad.all.update');
+Route::get('ad/all/destroy', [AdAllController::class, 'destroy'])->name('ad.all.destroy');
