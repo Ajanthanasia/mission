@@ -22,7 +22,7 @@
     <div class="signup-link">Not a member? <a href="{{route('sign-in')}}">SignIn</a></div>
 </form>
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-12">
         <form action="{{ route('sign-up.store') }}" method="post">
             @csrf
@@ -51,5 +51,5 @@
             </div>
         </form>
     </div>
-</div>
+</div> --}}
 @endsection
