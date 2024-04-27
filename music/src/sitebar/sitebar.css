@@ -1,9 +1,0 @@
-        .SidebarContainner {
-            width: 100px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            background-color: antiquewhite;
-        }
